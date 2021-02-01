@@ -1,175 +1,33 @@
 <html>
-
+<head>
 <style>
+    #headlogo{
+        width: 20%;
+        margin-left:40%;
+        margin-right:40%;
+    }
+    #foot{
+        width: 100%;
+        position: sticky;
+        bottom: 0;
+    }
+    .content{
+        width: 90%;
+        margin-left:5%;
+        margin-right:5%;
+    }
     body {
-        overflow: hidden;
         margin: 0;
         padding: 0;
     }
-
-    .bg {
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .text {
-        position: fixed;
-    }
 </style>
 
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1920px" height="1080px" version="1.1"
-    shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality"
-    fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 1.92 1.08" xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
-    <defs>
+</head>
+<body>
+    <img id="headlogo" src="5.svg" alt="">
+    <img class='content' src="che.svg" alt="">
 
-    </defs>
-    <text transform='scale(0.1)' id="text" x="0" y="1" fill="black" font-size="1">dsadsa</text>
-    <rect fill="yellow" x="0.1" y="0.1" width="0.1" height="0.1" onclick="move()" />
-    <g id="un" transform='translate(0.5,0.5)'>
-        <circle id='route' r="0.002" fill="black" />
-
-        <g id='earthrun'>
-            <circle id='earth' r="0.02" fill="blue" />
-        </g>
-
-        <circle id='sun' r="0.02" fill="yellow" />
-        <circle id='moon' r="0.02" fill="#EADE7C" />
-
-    </g>
-</svg>
-
-<script>
-    var int = self.setInterval("clock()", 1);
-    var eleun = document.getElementById('un')
-    var eleroute = document.getElementById('route')
-    var eleearth = document.getElementById('earth')
-    var eleearthrun = document.getElementById('earthrun')
-    var elesun = document.getElementById('sun')
-    var elemoon = document.getElementById('moon')
-    var text = document.getElementById('text')
-
-
-    var xearth = 0;
-    var yearth = 0.1;
-    var zearth = 0.05;
-
-    var xsun = 0;
-    var ysun = -0.1;
-    var zsun = 0;
-
-    var xmoon = 0;
-    var ymoon = 0;
-    var zmoon = 0
-
-    var vxsun = -0.002
-    var vysun = 0
-    var vzsun = 0
-
-    var vxmoon = 0
-    var vymoon = 0
-    var vzmoon = 0
-
-    var vxearth =  -vxsun
-    // 0.00141421356237309504880168872421 圆周运动
-    var vyearth =0
-    var vzearth = 0
-
-    var axearth = 0;
-    var ayearth = 0;
-    var azearth = 0;
-
-    var axsun = 0;
-    var aysun = 0;
-    var azsun = 0;
-
-    var axmoon = 0;
-    var aymoon = 0;
-    var azmoon = 0;
-
-    function clock() {
-        var d1 = (Math.pow((xearth - xsun) * (xearth - xsun) + (yearth - ysun) * (yearth - ysun) + (zearth - zsun) * (zearth - zsun), -1.5)) * 0.000001
-        var d2 = (Math.pow((xearth - xmoon) * (xearth - xmoon) + (yearth - ymoon) * (yearth - ymoon) + (zearth - zmoon) * (zearth - zmoon), -1.5)) * 0.000001
-        var d3 = (Math.pow((xsun - xmoon) * (xsun - xmoon) + (ysun - ymoon) * (ysun - ymoon) + (zsun - zmoon) * (zsun - zmoon), -1.5)) * 0.000001
-
-    d2=0;
-    d3=0        // 取消第二个影响
-
-
-        // 影响系数
-        axearth = (d1 * (xsun - xearth) + d2 * (xmoon - xearth))
-        ayearth = (d1 * (ysun - yearth) + d2 * (ymoon - yearth))
-        azearth = (d1 * (zsun - zearth) + d2 * (zmoon - zearth))
-
-
-        axsun = (d1 * (xearth - xsun) + d3 * (xmoon - xsun))
-        aysun = (d1 * (yearth - ysun) + d3 * (ymoon - ysun))
-        azsun = (d1 * (zearth - zsun) + d3 * (zmoon - zsun))
-
-        axmoon = (d2 * (xearth - xmoon) + d3 * (xsun - xmoon))
-        aymoon = (d2 * (yearth - ymoon) + d3 * (ysun - ymoon))
-        azmoon = (d2 * (zearth - zmoon) + d3 * (zsun - zmoon))
-
-
-        text.textContent = zearth
-
-        vxearth += axearth
-        vyearth += ayearth
-        vzearth += azearth
-
-        vxsun += axsun
-        vysun += aysun
-        vzsun += azsun
-
-        vxmoon += axmoon
-        vymoon += aymoon
-        vzmoon += azmoon
-
-
-        xearth = xearth + vxearth;
-        yearth = yearth + vyearth;
-        zearth = zearth + vzearth;
-
-        xsun = xsun + vxsun;
-        ysun = ysun + vysun;
-        zsun = zsun + vzsun;
-
-        xmoon = xmoon + vxmoon;
-        ymoon = ymoon + vymoon;
-        zmoon = zmoon + vzmoon;
-
-
-        
-        // 画轨迹
-        // elenewearth=eleroute.cloneNode(true);
-        // elenewearth.setAttribute('cx',xearth)
-        // elenewearth.setAttribute('cy',yearth)
-        // eleun.appendChild(elenewearth);
-
-        // 跟踪其一
-        // eleun.setAttribute('transform', 'translate(' + (-xsun + 0.5) + ',' + (-ysun + 0.5) + ')')
-
-
-        eleearth.setAttribute('transform', 'scale(' + 0.1 / zearth + ')')
-        eleearth.setAttribute('opacity', ( - zearth * 10))
-
-      
-
-        eleearthrun.setAttribute('transform', 'translate(' + xearth + ',' + yearth + ')')
-        elesun.setAttribute('transform', 'translate(' + (xsun) + ',' + (ysun) + ')')
-        elemoon.setAttribute('transform', 'translate(' + (xmoon) + ',' + (ymoon) + ')')
-
-
-
-    }
-    function move() {
-        xsun += 0.1
-    }
-
-</script>
+    <img id='foot' src="bg.svg" alt="">
+</body>
 
 </html>
