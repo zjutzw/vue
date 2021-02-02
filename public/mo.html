@@ -1,0 +1,71 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div id="shape2"></div>
+    <div id="shape"></div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/player"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/curve-editor"></script>
+    <script>
+
+        
+
+
+      
+        // or
+
+        const shape = new mojs.Shape({
+            shape: 'circle',
+            parent:'#shape',
+            scale: { 0: 1 },
+            left: '250',
+            fill: 'red',
+            radius: 25,
+            duration:1000,
+            delay:0,
+            repeat: 0,
+        })
+        const shape2 = new mojs.Shape({
+            shape: 'circle',
+            name:'shape2',
+            scale: { 0: 2 },
+            left: '300',
+            fill: 'cyan',
+            radius: 30,
+            duration:1000,
+            repeat: 0,
+        })
+
+      
+      
+      
+        
+        // create the timeline
+        const mainTimeline = new mojs.Timeline({speed:1});
+        mainTimeline.append(shape2).append(shape);
+
+        // add the timeline to the player
+        const mojsPlayer = new MojsPlayer({
+            add: mainTimeline
+        });
+
+        document.getElementById('shape').addEventListener( 'click', function (e) {
+        playmotion()
+        
+        });
+
+        function playmotion(){
+
+            mainTimeline.replay();
+        }
+        mainTimeline.play();
+    </script>
+</body>
+
+</html>
