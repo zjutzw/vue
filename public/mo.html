@@ -7,47 +7,106 @@
 <body>
     <div id="shape2"></div>
     <div id="shape"></div>
-    
+    <div id='menu'></div>
+    <div id="close"></div>
+    <div id="hidden" hidden=true></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mojs/player"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mojs/curve-editor"></script>
     <script>
 
-        
 
 
-      
+
+
         // or
 
         const shape = new mojs.Shape({
             shape: 'circle',
-            parent:'#shape',
+            parent: '#shape',
             scale: { 0: 1 },
             left: '250',
             fill: 'red',
             radius: 25,
-            duration:1000,
-            delay:0,
+            duration: 1000,
+            delay: 0,
             repeat: 0,
         })
+        const rect1 = new mojs.Shape({
+            shape: 'rect',
+            scale: { 0: 1 },
+            fill: 'red',
+            radius: 200,
+            duration: 500,
+            repeat: 0,
+        })
+
+        var menu1 = new mojs.Shape({
+            shape: 'circle',
+            parent: '#menu',
+            scale: { 0: 1 },
+            left: { '0': '750' },
+            top: '100',
+            fill: 'red',
+            radius: 25,
+            duration: 10000,
+            delay: 0,
+            repeat: 0,
+        })
+        var menu2 = new mojs.Shape({
+            shape: 'circle',
+            parent: '#menu',
+            scale: { 0: 1 },
+            left: '500',
+            fill: 'red',
+            radius: 25,
+            duration: 1000,
+            delay: 0,
+            repeat: 0,
+        })
+
+        var menu3 = new mojs.Shape({
+            shape: 'circle',
+            parent: '#menu',
+            scale: { 0: 1 },
+            left: { '0': '750' },
+            fill: 'red',
+            radius: 25,
+            duration: 1000,
+            delay: 0,
+            repeat: 0,
+        })
+        var close1 = new mojs.Shape({
+            shape: 'circle',
+            parent:rect1.el,
+            scale: { 1: 1 },
+            left:{'400':'360'},
+            top:{'0':'40'},
+            fill: 'blue',
+            radius: 25,
+            duration: 1000,
+            repeat: 0,
+        })
+
+
         const shape2 = new mojs.Shape({
             shape: 'circle',
-            name:'shape2',
+            name: 'shape2',
             scale: { 0: 2 },
             left: '300',
             fill: 'cyan',
             radius: 30,
-            duration:1000,
+            duration: 1000,
             repeat: 0,
         })
 
-      
-      
-      
-        
+
+
+
+
         // create the timeline
-        const mainTimeline = new mojs.Timeline({speed:1});
+        const mainTimeline = new mojs.Timeline({ speed: 1 });
         mainTimeline.append(shape2).append(shape);
 
         // add the timeline to the player
@@ -55,15 +114,17 @@
             add: mainTimeline
         });
 
-        document.getElementById('shape').addEventListener( 'click', function (e) {
-        playmotion()
-        
+        document.getElementById('shape').addEventListener('click', function (e) {
+            rect1.play();
+            close1.play();
         });
 
-        function playmotion(){
+        close1.el.addEventListener('click', function () {
+            rect1._hide();
+            close1._hide();
+        });
 
-            mainTimeline.replay();
-        }
+        
         mainTimeline.play();
     </script>
 </body>
