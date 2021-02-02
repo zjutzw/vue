@@ -1,7 +1,11 @@
 <html>
 
 <head>
-
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,12 +19,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@mojs/player"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mojs/curve-editor"></script>
     <script>
-
-
-
-
-
+        var clientwidth = document.body.clientWidth;
+        var clientheight = document.body.clientHeight;
+        var openmenu,closemenu
         // or
+
+
+        class closepath extends mojs.CustomShape {
+            getShape() { return "<path d='M87.04 4.28l-37.02 37.02 -37.03 -37.02c-0.57,-0.6 -1.36,-0.93 -2.18,-0.93 -0.83,0 -1.62,0.33 -2.19,0.93l-4.34 4.34c-0.59,0.57 -0.93,1.36 -0.93,2.18 0,0.83 0.34,1.61 0.93,2.19l37.03 37.02 -37.03 37.03c-0.58,0.57 -0.91,1.35 -0.91,2.17 0,0.82 0.33,1.6 0.91,2.17l4.34 4.34c0.57,0.59 1.36,0.93 2.19,0.93 0.82,0 1.61,-0.34 2.18,-0.93l37.03 -37.03 37.03 37.03c0.57,0.59 1.36,0.93 2.18,0.93 0.82,0 1.61,-0.34 2.18,-0.93l4.35 -4.34c0.59,-0.57 0.92,-1.36 0.92,-2.18 0,-0.83 -0.33,-1.62 -0.93,-2.19l-37.02 -37.03 37.02 -37.02c0.6,-0.58 0.93,-1.37 0.93,-2.19 0,-0.82 -0.33,-1.61 -0.93,-2.18l-4.37 -4.31c-0.57,-0.59 -1.35,-0.92 -2.17,-0.92 -0.81,0 -1.6,0.33 -2.17,0.92z'></path>"; } // see full code here: https://codepen.io/sol0mka/pen/75894cd43b0f12ecdb425cad5149ab37
+            getLength() { return 100; } // optional
+        }
+        mojs.addShape('closepath', closepath);
+        const background= new mojs.Shape({
+            shape: 'rect',
+            fill: '#FBB03B',
+            radiusX: document.body.clientWidth / 2,
+            radiusY: document.body.clientHeight / 2 ,
+            isShowStart:  true, 
+        })
+
 
         const shape = new mojs.Shape({
             shape: 'circle',
@@ -36,56 +53,169 @@
         const rect1 = new mojs.Shape({
             shape: 'rect',
             scale: { 0: 1 },
-            fill: 'red',
-            radius: 200,
+            fill: '#FBB03B',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
             duration: 500,
             repeat: 0,
         })
-
+        
         var menu1 = new mojs.Shape({
             shape: 'circle',
-            parent: '#menu',
+            parent: background.el,
             scale: { 0: 1 },
-            left: { '0': '750' },
-            top: '100',
+            x:{0:250},
+            opacity:0.8,
             fill: 'red',
-            radius: 25,
-            duration: 10000,
-            delay: 0,
+            radius: 100,
+            duration: 1000,
             repeat: 0,
         })
         var menu2 = new mojs.Shape({
             shape: 'circle',
-            parent: '#menu',
+            parent: background.el,
             scale: { 0: 1 },
-            left: '500',
-            fill: 'red',
-            radius: 25,
+            x:{0:-250},
+            opacity:0.8,
+            fill: 'yellow',
+            radius: 100,
             duration: 1000,
-            delay: 0,
             repeat: 0,
         })
 
         var menu3 = new mojs.Shape({
             shape: 'circle',
-            parent: '#menu',
+            parent: background.el,
             scale: { 0: 1 },
-            left: { '0': '750' },
-            fill: 'red',
-            radius: 25,
+            y:{0:-250},
+            opacity:0.8,
+            fill: 'pink',
+            radius: 100,
             duration: 1000,
-            delay: 0,
             repeat: 0,
         })
-        var close1 = new mojs.Shape({
+        var menu4 = new mojs.Shape({
             shape: 'circle',
-            parent:rect1.el,
-            scale: { 1: 1 },
-            left:{'400':'360'},
-            top:{'0':'40'},
-            fill: 'blue',
-            radius: 25,
+            parent: background.el,
+            scale: { 0: 1 },
+            y:{0:250},
+            opacity:0.8,
+            fill: 'pink',
+            radius: 100,
             duration: 1000,
+            repeat: 0,
+        })
+        var menu = new mojs.Shape({
+            shape: 'circle',
+            parent:background.el,
+            scale: { 0: 1 },
+            opacity:1,
+            fill: '#0071BC',
+            radius: 100,
+            duration: 1000,
+            repeat: 0,
+        })
+
+        var contentbox = new mojs.Shape({
+            shape: 'rect',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            rx:{500:0},
+            ry:{500:0},
+            duration: 500,
+            repeat: 0,
+            onStart:function(){
+                closebox1.replay()
+                close1.replay()
+            }
+        })
+        var content1 = new mojs.Shape({
+            shape: 'rect',
+            className:'content',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+
+
+        const content2 = new mojs.Shape({
+            shape: 'rect',
+            className:'content',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+        const content3 = new mojs.Shape({
+            shape: 'rect',
+            className:'content',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+        const content4 = new mojs.Shape({
+            shape: 'rect',
+            className:'content',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+
+
+        var closebox = new mojs.Shape({
+            shape: 'circle',
+            parent: rect1.el,
+            scale: { 0: 1 },
+            top: 0,
+            left: rect1.el.clientWidth,
+            x: { 0: -100 },
+            y: { 0: 100 },
+            fill: 'white',
+            opacity:0.5,
+            radius: 40,
+            duration: 1000,
+            repeat: 0,
+        })
+
+        var closebox1 = new mojs.Shape({
+            shape: 'circle',
+            parent: contentbox.el,
+            scale: { 0: 1 },
+            top: 0,
+            left: content1.el.clientWidth,
+            x: { 0: -100 },
+            y: { 0: 100 },
+            fill: 'white',
+            opacity:0.5,
+            radius: 40,
+            duration: 500,
+            repeat: 0,
+            onStart:function(){
+                close1.play()
+            }
+        })
+
+
+        var close1 = new mojs.Shape({
+            shape: 'closepath',
+            parent: closebox1.el,
+            fill: 'gris',
+            duration: 1200,
+            scale:{0:0.5},
+            angle:        { 0: 360 },
             repeat: 0,
         })
 
@@ -99,6 +229,7 @@
             radius: 30,
             duration: 1000,
             repeat: 0,
+            
         })
 
 
@@ -107,7 +238,7 @@
 
         // create the timeline
         const mainTimeline = new mojs.Timeline({ speed: 1 });
-        mainTimeline.append(shape2).append(shape);
+        mainTimeline.add(shape2, shape);
 
         // add the timeline to the player
         const mojsPlayer = new MojsPlayer({
@@ -116,16 +247,60 @@
 
         document.getElementById('shape').addEventListener('click', function (e) {
             rect1.play();
+            closebox.play();
             close1.play();
+            console.log(document.body.clientWidth)
         });
 
-        close1.el.addEventListener('click', function () {
-            rect1._hide();
-            close1._hide();
-        });
+        closebox.el.addEventListener('click', function () {
+            rect1.playBackward()
+            // rect1._hide();
 
+        });
         
-        mainTimeline.play();
+        openmenu=function() {
+           menu1.play();
+           menu2.play();
+           menu3.play();
+           menu4.play();
+           menu.el.removeEventListener('click',openmenu);
+           menu.el.addEventListener('click',closemenu);
+
+        }
+        closemenu=function() {
+           menu1.playBackward();
+           menu2.playBackward();
+           menu3.playBackward();
+           menu4.playBackward();
+           menu.el.removeEventListener('click',closemenu);
+           menu.el.addEventListener('click',openmenu);
+
+        }
+        menu.el.addEventListener('click',openmenu);
+
+        menu1.el.addEventListener('click',function(){
+            contentbox.play();
+        });
+        menu2.el.addEventListener('click',function(){
+            contentbox.fill='red'
+            contentbox.play();
+        });
+        menu3.el.addEventListener('click',function(){
+            contentbox.play();
+        });
+        menu4.el.addEventListener('click',function(){
+            contentbox.play();
+        });
+
+        closebox1.el.addEventListener('click', function () {
+            contentbox.playBackward()
+            closebox1.playBackward()
+            // rect1._hide();
+
+        });
+
+
+        menu.play();
     </script>
 </body>
 
