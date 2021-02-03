@@ -12,8 +12,7 @@
     <div id="shape2"></div>
     <div id="shape"></div>
     <div id='menu'></div>
-    <div id="close"></div>
-    <div id="hidden" hidden=true></div>
+    <audio id='sound1' src='openwater.mp3'  ></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mojs/player"></script>
@@ -22,6 +21,8 @@
        
         var width=Math.min(document.body.clientWidth,document.body.clientHeight)
         var openmenu,closemenu
+        var elsound1=document.getElementById('sound1')
+        
         // or
 
 
@@ -125,10 +126,8 @@
             rx:{500:0},
             ry:{500:0},
             duration: 500,
-            repeat: 0,
             onStart:function(){
                 closebox1.replay()
-                close1.replay()
             }
         })
         var content1 = new mojs.Shape({
@@ -215,7 +214,7 @@
             duration: 1200,
             scale:{0:0.5},
             angle:        { 0: 360 },
-            repeat: 0,
+            
         })
 
 
@@ -227,7 +226,6 @@
             fill: 'cyan',
             radius: 30,
             duration: 1000,
-            repeat: 0,
             
         })
 
@@ -262,6 +260,7 @@
            menu2.play();
            menu3.play();
            menu4.play();
+           elsound1.play();
            menu.el.removeEventListener('click',openmenu);
            menu.el.addEventListener('click',closemenu);
 
@@ -284,6 +283,7 @@
         menu2.el.addEventListener('click',function(){
             contentbox.play();
             content2.play();
+            
         });
         menu3.el.addEventListener('click',function(){
             contentbox.play();
@@ -297,7 +297,6 @@
 
         closebox1.el.addEventListener('click', function () {
             contentbox.playBackward()
-            closebox1.playBackward()
             content1._hide()
             content2._hide()
             content3._hide()
@@ -308,7 +307,10 @@
 
 
         menu.play();
+        content1.el.removeChild(content1.el.firstChild)
         content1.el.insertAdjacentHTML('afterbegin','<img width="100%" height="100%" src="5.svg"></img>')
+
+        content2.el.removeChild(content2.el.firstChild)
         content2.el.insertAdjacentHTML('afterbegin','<img width="100%" height="100%" src="che.svg"></img>')
     </script>
 </body>
