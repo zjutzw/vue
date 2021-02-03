@@ -2,11 +2,13 @@
 
 <head>
     <style>
-        html,
         body {
             -webkit-text-size-adjust: 100%;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             overflow: hidden;
+        }
+        .content{
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -47,10 +49,10 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            x: { 0: 250 },
+            x: width/4,
             opacity: 0.8,
             fill: 'red',
-            radius: 100,
+            radius: width/10,
             duration: 1000,
             repeat: 0,
         })
@@ -58,10 +60,10 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            x: { 0: -250 },
+            x: -width/4,
             opacity: 0.8,
             fill: 'yellow',
-            radius: 100,
+            radius: width/10,
             duration: 1000,
             repeat: 0,
         })
@@ -70,10 +72,10 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            y: { 0: -250 },
+            y: -width/4,
             opacity: 0.8,
             fill: 'pink',
-            radius: 100,
+            radius: width/10,
             duration: 1000,
             repeat: 0,
         })
@@ -81,10 +83,10 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            y: { 0: 250 },
+            y: width/4,
             opacity: 0.8,
             fill: 'pink',
-            radius: 100,
+            radius: width/10,
             duration: 1000,
             repeat: 0,
         })
@@ -94,7 +96,7 @@
             scale: { 0: 1 },
             opacity: 1,
             fill: '#0071BC',
-            radius: width / 6,
+            radius: width / 8,
             duration: 1000,
             repeat: 0,
         })
@@ -115,7 +117,7 @@
         var content1 = new mojs.Shape({
             shape: 'rect',
             parent: contentbox.el,
-            className: 'content1',
+            className: 'content',
             scale: 1,
             fill: 'none',
             radiusX: document.body.clientWidth / 2 - 20,
@@ -126,7 +128,8 @@
         var content2 = new mojs.Shape({
             shape: 'rect',
             parent: contentbox.el,
-            scale: { 0: 0.8 },
+            className: 'content',
+            scale: { 0: 1},
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
@@ -136,7 +139,8 @@
         var content3 = new mojs.Shape({
             shape: 'rect',
             parent: contentbox.el,
-            scale: { 0: 0.8 },
+            className:'content',
+            scale: { 0: 1},
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
@@ -146,7 +150,8 @@
         var content4 = new mojs.Shape({
             shape: 'rect',
             parent: contentbox.el,
-            scale: { 0: 0.5 },
+            className: 'content',
+            scale: { 0: 1},
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
@@ -182,7 +187,6 @@
             fill: 'gris',
             duration: 1200,
             scale: { 0: 0.5 },
-            angle: { 0: 360 },
 
         })
 
@@ -262,6 +266,9 @@
 
         content2.el.removeChild(content2.el.firstChild)
         content2.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="che.svg"></img>')
+
+        content3.el.removeChild(content3.el.firstChild)
+        content3.el.insertAdjacentHTML('afterbegin', '<div style="margin:50px"><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><img width="100%" height="100%" src="che.svg"></img><h2>sdadsdadsadasdasd</h2><h2>sdadsdadsadasdasd</h2></div')
     </script>
 </body>
 
