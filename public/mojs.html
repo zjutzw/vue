@@ -2,7 +2,10 @@
 
 <head>
     <style>
+        html,
         body {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             overflow: hidden;
         }
     </style>
@@ -12,17 +15,15 @@
     <div id="shape2"></div>
     <div id="shape"></div>
     <div id='menu'></div>
-    <audio id='sound1' src='openwater.mp3'  ></audio>
+    <audio id='sound1' src='openwater.mp3'></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mojs/player"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mojs/curve-editor"></script>
     <script>
-       
-        var width=Math.min(document.body.clientWidth,document.body.clientHeight)
-        var openmenu,closemenu
-        var elsound1=document.getElementById('sound1')
-        
+
+        var width = Math.min(document.body.clientWidth, document.body.clientHeight)
+        var openmenu, closemenu
+        var elsound1 = document.getElementById('sound1')
+
         // or
 
 
@@ -31,42 +32,23 @@
             getLength() { return 100; } // optional
         }
         mojs.addShape('closepath', closepath);
-        const background= new mojs.Shape({
+        const background = new mojs.Shape({
             shape: 'rect',
             fill: '#FBB03B',
             radiusX: document.body.clientWidth / 2,
-            radiusY: document.body.clientHeight / 2 ,
-            isShowStart:  true, 
+            radiusY: document.body.clientHeight / 2,
+            isShowStart: true,
         })
 
 
-        const shape = new mojs.Shape({
-            shape: 'circle',
-            parent: '#shape',
-            scale: { 0: 1 },
-            left: '250',
-            fill: 'red',
-            radius: 25,
-            duration: 1000,
-            delay: 0,
-            repeat: 0,
-        })
-        const rect1 = new mojs.Shape({
-            shape: 'rect',
-            scale: { 0: 1 },
-            fill: '#FBB03B',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-            duration: 500,
-            repeat: 0,
-        })
-        
+       
+
         var menu1 = new mojs.Shape({
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            x:{0:250},
-            opacity:0.8,
+            x: { 0: 250 },
+            opacity: 0.8,
             fill: 'red',
             radius: 100,
             duration: 1000,
@@ -76,8 +58,8 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            x:{0:-250},
-            opacity:0.8,
+            x: { 0: -250 },
+            opacity: 0.8,
             fill: 'yellow',
             radius: 100,
             duration: 1000,
@@ -88,8 +70,8 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            y:{0:-250},
-            opacity:0.8,
+            y: { 0: -250 },
+            opacity: 0.8,
             fill: 'pink',
             radius: 100,
             duration: 1000,
@@ -99,8 +81,8 @@
             shape: 'circle',
             parent: background.el,
             scale: { 0: 1 },
-            y:{0:250},
-            opacity:0.8,
+            y: { 0: 250 },
+            opacity: 0.8,
             fill: 'pink',
             radius: 100,
             duration: 1000,
@@ -108,11 +90,11 @@
         })
         var menu = new mojs.Shape({
             shape: 'circle',
-            parent:background.el,
+            parent: background.el,
             scale: { 0: 1 },
-            opacity:1,
+            opacity: 1,
             fill: '#0071BC',
-            radius: width/6,
+            radius: width / 6,
             duration: 1000,
             repeat: 0,
         })
@@ -123,17 +105,17 @@
             fill: '#F15A24',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
-            rx:{500:0},
-            ry:{500:0},
+            rx: { 500: 0 },
+            ry: { 500: 0 },
             duration: 500,
-            onStart:function(){
+            onStart: function () {
                 closebox1.replay()
             }
         })
         var content1 = new mojs.Shape({
             shape: 'rect',
-            parent:contentbox.el,
-            className:'content1',
+            parent: contentbox.el,
+            className: 'content1',
             scale: 1,
             fill: 'none',
             radiusX: document.body.clientWidth / 2 - 20,
@@ -143,8 +125,8 @@
 
         var content2 = new mojs.Shape({
             shape: 'rect',
-            parent:contentbox.el,
-            scale: { 0: 0.8},
+            parent: contentbox.el,
+            scale: { 0: 0.8 },
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
@@ -153,7 +135,7 @@
         })
         var content3 = new mojs.Shape({
             shape: 'rect',
-            parent:contentbox.el,
+            parent: contentbox.el,
             scale: { 0: 0.8 },
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
@@ -163,8 +145,8 @@
         })
         var content4 = new mojs.Shape({
             shape: 'rect',
-            parent:contentbox.el,
-            scale: { 0: 0.5},
+            parent: contentbox.el,
+            scale: { 0: 0.5 },
             fill: '#F15412',
             radiusX: document.body.clientWidth / 2 - 20,
             radiusY: document.body.clientHeight / 2 - 20,
@@ -173,20 +155,7 @@
         })
 
 
-        var closebox = new mojs.Shape({
-            shape: 'circle',
-            parent: rect1.el,
-            scale: { 0: 1 },
-            top: 0,
-            left: rect1.el.clientWidth,
-            x: { 0: -100 },
-            y: { 0: 100 },
-            fill: 'white',
-            opacity:0.5,
-            radius: 40,
-            duration: 1000,
-            repeat: 0,
-        })
+      
 
         var closebox1 = new mojs.Shape({
             shape: 'circle',
@@ -197,11 +166,11 @@
             x: { 0: -100 },
             y: { 0: 100 },
             fill: 'white',
-            opacity:0.5,
+            opacity: 0.5,
             radius: 40,
             duration: 500,
             repeat: 0,
-            onStart:function(){
+            onStart: function () {
                 close1.play()
             }
         })
@@ -212,35 +181,20 @@
             parent: closebox1.el,
             fill: 'gris',
             duration: 1200,
-            scale:{0:0.5},
-            angle:        { 0: 360 },
-            
+            scale: { 0: 0.5 },
+            angle: { 0: 360 },
+
         })
 
 
-        const shape2 = new mojs.Shape({
-            shape: 'circle',
-            name: 'shape2',
-            scale: { 0: 2 },
-            left: '300',
-            fill: 'cyan',
-            radius: 30,
-            duration: 1000,
-            
-        })
+
 
 
 
 
 
         // create the timeline
-        const mainTimeline = new mojs.Timeline({ speed: 1 });
-        mainTimeline.add(shape2, shape);
-
-        // add the timeline to the player
-        const mojsPlayer = new MojsPlayer({
-            add: mainTimeline
-        });
+      
 
         document.getElementById('shape').addEventListener('click', function (e) {
             rect1.play();
@@ -249,47 +203,43 @@
             console.log(document.body.clientWidth)
         });
 
-        closebox.el.addEventListener('click', function () {
-            rect1.playBackward()
-            // rect1._hide();
-
-        });
         
-        openmenu=function() {
-           menu1.play();
-           menu2.play();
-           menu3.play();
-           menu4.play();
-           elsound1.play();
-           menu.el.removeEventListener('click',openmenu);
-           menu.el.addEventListener('click',closemenu);
+
+        openmenu = function () {
+            menu1.play();
+            menu2.play();
+            menu3.play();
+            menu4.play();
+            elsound1.play();
+            menu.el.removeEventListener('click', openmenu);
+            menu.el.addEventListener('click', closemenu);
 
         }
-        closemenu=function() {
-           menu1.playBackward();
-           menu2.playBackward();
-           menu3.playBackward();
-           menu4.playBackward();
-           menu.el.removeEventListener('click',closemenu);
-           menu.el.addEventListener('click',openmenu);
+        closemenu = function () {
+            menu1.playBackward();
+            menu2.playBackward();
+            menu3.playBackward();
+            menu4.playBackward();
+            menu.el.removeEventListener('click', closemenu);
+            menu.el.addEventListener('click', openmenu);
 
         }
-        menu.el.addEventListener('click',openmenu);
+        menu.el.addEventListener('click', openmenu);
 
-        menu1.el.addEventListener('click',function(){
+        menu1.el.addEventListener('click', function () {
             contentbox.play();
             content1.play();
         });
-        menu2.el.addEventListener('click',function(){
+        menu2.el.addEventListener('click', function () {
             contentbox.play();
             content2.play();
-            
+
         });
-        menu3.el.addEventListener('click',function(){
+        menu3.el.addEventListener('click', function () {
             contentbox.play();
             content3.play();
         });
-        menu4.el.addEventListener('click',function(){
+        menu4.el.addEventListener('click', function () {
             contentbox.play();
             content4.play();
 
@@ -308,10 +258,10 @@
 
         menu.play();
         content1.el.removeChild(content1.el.firstChild)
-        content1.el.insertAdjacentHTML('afterbegin','<img width="100%" height="100%" src="5.svg"></img>')
+        content1.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="5.svg"></img>')
 
         content2.el.removeChild(content2.el.firstChild)
-        content2.el.insertAdjacentHTML('afterbegin','<img width="100%" height="100%" src="che.svg"></img>')
+        content2.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="che.svg"></img>')
     </script>
 </body>
 
